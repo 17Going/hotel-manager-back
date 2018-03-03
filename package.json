@@ -1,0 +1,26 @@
+{
+  "name": "hotel-manager-back",
+  "version": "1.0.0",
+  "description": "酒店管理系统后台",
+  "main": "index.js",
+  "scripts": {
+    "start": "node-dev server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/17Going/hotel-manager-back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/17Going/hotel-manager-back/issues"
+  },
+  "homepage": "https://github.com/17Going/hotel-manager-back#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.7"
+  }
+}

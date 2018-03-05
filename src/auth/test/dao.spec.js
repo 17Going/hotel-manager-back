@@ -4,7 +4,7 @@ require('../../../config/db.config').then(function(){
 
     userDao.findUserByName('luozhidan', function(err, data){
         console.log(data)
-    })
+    });
     
     // userDao.createUser({
     //     username: 'luozhidan',

@@ -36,7 +36,6 @@ authSchema.methods.findUser = function(cb){
 };
 
 // 第四步添加静态方法
-
 /**
  * @description
  * @static
@@ -57,7 +56,6 @@ authSchema.query.byName = function(name) {
 };
 
 // 定义虚拟的属性（不会被数据库永久化，类似get方法）
-
 authSchema.virtual('name').get(function () {
     return this.username + '管理员'; // TODO可以对永久化属性进行计算处理
 });

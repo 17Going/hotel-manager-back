@@ -6,6 +6,7 @@ const express = require('express');
 const app = express();
 const commonUtil = require('./common/common-util');
 const jwt = require('jsonwebtoken');
+const verifyCfg = require('./config/vertify.config');
 
 // 启动数据库
 require('./config/db.config');
@@ -21,15 +22,14 @@ app.use(cookieParser());
 
 // 中间件，标记所有请求时间
 app.use((req, res, next)=>{
-    console.log(new Date().toLocaleString());
-    
     // 跳过登录，不进行token验证
     if(req.path === '/login'){
         next();
     } else {
         // 进行token验证
-        jwt.verify(req.cookies['HOTEL_TOKEN'], 'hotel', function(err){
+        jwt.verify(req.cookies['HOTEL_TOKEN'], verifyCfg.cert, function(err){
             if(err){
+                // token认证失败，无权限访问
                 res.json(commonUtil.package({}, '403'));
             } else {
                 next();

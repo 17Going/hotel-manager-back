@@ -4,6 +4,8 @@
 
 const express = require('express');
 const app = express();
+const commonUtil = require('./common/common-util');
+const jwt = require('jsonwebtoken');
 
 // 启动数据库
 require('./config/db.config');
@@ -20,11 +22,24 @@ app.use(cookieParser());
 // 中间件，标记所有请求时间
 app.use((req, res, next)=>{
     console.log(new Date().toLocaleString());
-    next();
-})
+    
+    // 跳过登录，不进行token验证
+    if(req.path === '/login'){
+        next();
+    } else {
+        // 进行token验证
+        jwt.verify(req.cookies['HOTEL_TOKEN'], 'hotel', function(err){
+            if(err){
+                res.json(commonUtil.package({}, '403'));
+            } else {
+                next();
+            }
+        });
+    }
+});
 
 // 注册登录路由
-const loginRouter = require('./src/login/router');
+const loginRouter = require('./src/auth/router');
 app.use(loginRouter);
 
 app.listen(3001, ()=>{

@@ -8,6 +8,11 @@ const options = {
         desc: '',
         sug: ''
     },
+    "403": {
+        code: "403",
+        desc: '您无权访问',
+        sug: ''
+    },
     "1001": {
         code:'1001',
         desc:"用户已存在",

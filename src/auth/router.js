@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-// 引入userdao
-const userDao = require('./user-dao');
-const commonUtil = require('../common/common-util');
+// 引入dao
+const userDao = require('./dao');
+const commonUtil = require('../../common/common-util');
+const jwt = require('jsonwebtoken');
 
 router.post('/login', (req, res)=>{
     let user = req.body;
@@ -18,7 +19,19 @@ router.post('/login', (req, res)=>{
             if(user.password !== data[0].password){
                 res.json(commonUtil.package({}, '1002'));
             } else { 
-                // TODO鉴权成功
+                // 鉴权成功, 生成token
+                jwt.sign({
+                    username: user.username
+                }, 'hotel', {
+                    expiresIn: 10 // 有效时间
+                }, function(err, token){
+                    if(!err){
+                        res.json(commonUtil.package({
+                            username: user.username,
+                            token: token
+                        }, '0'));
+                    }
+                });
             }
         }
     });

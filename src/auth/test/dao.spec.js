@@ -1,4 +1,4 @@
-const userDao = require('../user-dao');
+const userDao = require('../dao');
 
 require('../../../config/db.config').then(function(){
 

@@ -2,6 +2,7 @@
  * 公共方法类，将所有一些公共方法统一管理起来
  */
 const getCode = require('../config/error-code.config');
+const svg = require('svg-captcha');
 
 /**
  * @description
@@ -17,6 +18,17 @@ function package(data, code){
     }
 }
 
+function getVertifyCode(){
+    return svg.create({
+        color: true,
+        noise: 4,
+        ignoreChars: '0oil2z',
+        background: '#ddd'
+    });
+}
+
+
 module.exports = {
-    package
+    package,
+    getVertifyCode
 }

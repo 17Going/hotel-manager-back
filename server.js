@@ -20,10 +20,14 @@ app.use(bodyParser.json());
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
+// 使用session
+const session = require('express-session');
+app.use(session({ secret: 'hotel'}));
+
 // 中间件，标记所有请求时间
 app.use((req, res, next)=>{
     // 跳过登录，不进行token验证
-    if(req.path === '/login'){
+    if(req.path === '/login' || req.path === '/vertifycode'){
         next();
     } else {
         // 进行token验证

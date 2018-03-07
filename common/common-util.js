@@ -22,7 +22,7 @@ function getVertifyCode(){
     return svg.create({
         color: true,
         noise: 4,
-        ignoreChars: '0oil2z',
+        ignoreChars: '0oil2z`',
         background: '#ddd'
     });
 }
